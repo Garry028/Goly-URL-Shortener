@@ -1,12 +1,14 @@
 import Heading from "./components/Heading"
-import ShortenerCard from "./components/ShortenerCard"
+import ShortenResponse from "./components/ShortenResponse"
+import URLinput from "./components/URLinput"
 
 function App() {
 
   return (
-    <div className="container mx-auto mt-24">
+    <div className="container mx-auto mt-24 p-4">
       <Heading />
-      <ShortenerCard />
+      <URLinput />
+      <ShortenResponse/>
     </div>
   )
 }
