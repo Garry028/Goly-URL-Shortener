@@ -12,13 +12,13 @@ import (
 
 var DATABASE *gorm.DB
 
-type connection struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	DBName   string
-}
+// type connection struct {
+// 	Host     string
+// 	Port     string
+// 	User     string
+// 	Password string
+// 	DBName   string
+// }
 
 func Init() {
 	err := godotenv.Load("config/.env")
