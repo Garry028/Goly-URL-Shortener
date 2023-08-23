@@ -27,15 +27,15 @@ func Init() {
 		fmt.Printf("Error loading .env file: %s\n", err.Error())
 		return
 	}
-	connInfo := connection{
-		Host:     os.Getenv("POSTGRES_URL"),
-		Port:     os.Getenv("POSTGRES_PORT"),
-		User:     os.Getenv("POSTGRES_USER"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		DBName:   os.Getenv("POSTGRES_DB"),
-	}
+	// connInfo := connection{
+	// 	Host:     os.Getenv("POSTGRES_URL"),
+	// 	Port:     os.Getenv("POSTGRES_PORT"),
+	// 	User:     os.Getenv("POSTGRES_USER"),
+	// 	Password: os.Getenv("POSTGRES_PASSWORD"),
+	// 	DBName:   os.Getenv("POSTGRES_DB"),
+	// }
 
-	DATABASE, err = gorm.Open(postgres.Open(connToString(connInfo)), &gorm.Config{})
+	DATABASE, err = gorm.Open(postgres.Open(os.Getenv("POSTGRES_DB")), &gorm.Config{})
 
 	if err != nil {
 		fmt.Printf("Error connecting to database: %s\n", err.Error())
@@ -52,7 +52,7 @@ func Init() {
 	}
 
 }
-func connToString(info connection) string {
-	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		info.Host, info.Port, info.User, info.Password, info.DBName)
-}
+// func connToString(info connection) string {
+// 	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+// 		info.Host, info.Port, info.User, info.Password, info.DBName)
+// }
