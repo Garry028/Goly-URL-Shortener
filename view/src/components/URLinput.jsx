@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
+import { axiosFireApi } from '../api/config';
 
-function URLinput() {
+
+function URLinput({ setresponse }) {
     const [url, setUrl] = useState('');
     const [useRandom, setUseRandom] = useState(false);
     const [customShortUrl, setCustomShortUrl] = useState('');
@@ -10,16 +13,28 @@ function URLinput() {
     };
 
     const handleRandomCheckboxChange = () => {
-        setUseRandom(!useRandom);
+        if (useRandom) {
+            setUseRandom(false);
+            setCustomShortUrl(''); // Clear customShortUrl when useRandom is true
+        } else {
+            setUseRandom(true);
+        }
     };
+
 
     const handleCustomShortUrlChange = (event) => {
         setCustomShortUrl(event.target.value);
+
     };
 
-    const handleShortenClick = () => {
-        // Logic to shorten the URL using the chosen options
-        // You can use the 'url', 'useRandom', and 'customShortUrl' state values here
+    const handleShortenClick = async () => {
+        const data = {
+            "redirect": url,
+            "goly": useRandom ? null : customShortUrl,
+            "random": useRandom
+        }
+        const response = await axiosFireApi("goly", "POST", data);
+        setresponse(response);
     };
 
     return (
